@@ -4,30 +4,17 @@ class Solution(object):
         :type mat: List[List[int]]
         :rtype: int
         """
-
-        def check(mat, i, j):
-            if mat[i][j] == 0:
-                return 0
-
-            sm = 0
-
-            for col in range(n):
-                sm += mat[i][col]
-
-            for row in range(m):
-                sm += mat[row][j]
-            sm -= 1
-
-            return sm
-
         m = len(mat)
         n = len(mat[0])
-        c = 0
+
+        row_sum = [sum(row) for row in mat]
+        col_sum = [sum(mat[i][j] for i in range(m)) for j in range(n)]
+
+        count = 0
 
         for i in range(m):
             for j in range(n):
-                x = check(mat, i, j)
-                if x == 1:
-                    c += 1
+                if mat[i][j] == 1 and row_sum[i] == 1 and col_sum[j] == 1:
+                    count += 1
 
-        return c
+        return count
