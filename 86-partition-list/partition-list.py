@@ -10,37 +10,55 @@ class Solution(object):
         :type x: int
         :rtype: Optional[ListNode]
         """
+        s = s_head = ListNode(0)
+        b = b_head = ListNode(0)
+
         curr = head
-        curr2 = head
-        lar = []
-        rar = []
-        c = 0
-        ans = []
-        fa = []
+
         while curr:
-            d = curr.val
-            if d < x:
-                lar.append(d)
-            elif d == x:
-                c += 1
+            if curr.val < x:
+                s.next = curr
+                s = s.next
             else:
-                rar.append(d)
+                b.next = curr
+                b = b.next
             curr = curr.next
-            ans.append(d)
-        # print(lar,rar,c) #([1, 2, 2], [4, 5], 1)
-        fa.extend(lar)
+
+        b.next = None
+        s.next = b_head.next
+        return s_head.next
+
+        # curr = head
+        # curr2 = head
+        # lar = []
+        # rar = []
+        # c = 0
+        # ans = []
+        # fa = []
+        # while curr:
+        #     d = curr.val
+        #     if d < x:
+        #         lar.append(d)
+        #     elif d == x:
+        #         c += 1
+        #     else:
+        #         rar.append(d)
+        #     curr = curr.next
+        #     ans.append(d)
+        # # print(lar,rar,c) #([1, 2, 2], [4, 5], 1)
+        # fa.extend(lar)
+        # # print(fa)
+        # n = len(lar)
+        # m = len(ans)
+        # # for j in range(n,m):
+        #     # fa.append
+        # for i in ans:
+        #     if i >= x:
+        #         fa.append(i)
         # print(fa)
-        n = len(lar)
-        m = len(ans)
-        # for j in range(n,m):
-            # fa.append
-        for i in ans:
-            if i >= x:
-                fa.append(i)
-        print(fa)
-        idx = 0
-        while curr2:
-            curr2.val = fa[idx]
-            idx += 1
-            curr2 = curr2.next
-        return head
+        # idx = 0
+        # while curr2:
+        #     curr2.val = fa[idx]
+        #     idx += 1
+        #     curr2 = curr2.next
+        # return head
