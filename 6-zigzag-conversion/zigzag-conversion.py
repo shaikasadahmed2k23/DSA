@@ -1,17 +1,22 @@
 class Solution:
-    def convert(self, s: str, r: int) -> str:
-        if r == 1 or r >= len(s):
+    def convert(self, s: str, numRows: int) -> str:
+
+        if numRows == 1 or numRows >= len(s):
             return s
 
-        rows = [""] * r
-        i, d = 0, 1
+        rows = [""] * numRows
 
-        for c in s:
-            rows[i] += c
+        i = 0
+        direction = 1
+
+        for ch in s:
+            rows[i] += ch
+
             if i == 0:
-                d = 1
-            elif i == r - 1:
-                d = -1
-            i += d
+                direction = 1
+            elif i == numRows - 1:
+                direction = -1
+
+            i += direction
 
         return "".join(rows)
